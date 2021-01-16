@@ -7,5 +7,7 @@ public class Constants {
         public static final String UNABLE_TO_PARSE_CSV_FILE = "Unable to parse CSV file '" + MUNRO_CSV_FILE_PATH + "'";
 
         public static final String UNABLE_TO_FIND_CSV_FILE = "Unable to find CSV file '" + MUNRO_CSV_FILE_PATH + "'";
+
+        public static final String MUNRO_DATA_NOT_LOADED = "Munro data was not loaded from CSV file on API startup";
     }
 }
