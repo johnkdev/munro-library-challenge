@@ -17,4 +17,17 @@ public class StringUtilsTest {
         assertEquals(StringUtils.toPositiveNonZeroInteger("0"), Optional.empty());
         assertEquals(StringUtils.toPositiveNonZeroInteger("foo"), Optional.empty());
     }
+
+    @Test
+    public void testToPositiveNonZeroDouble() {
+        assertEquals(StringUtils.toPositiveNonZeroDouble("0.9"), Optional.of(0.9));
+        assertEquals(StringUtils.toPositiveNonZeroDouble("1"), Optional.of(1.0));
+        assertEquals(StringUtils.toPositiveNonZeroDouble("10"), Optional.of(10.0));
+
+        assertEquals(StringUtils.toPositiveNonZeroDouble(""), Optional.empty());
+        assertEquals(StringUtils.toPositiveNonZeroDouble("0"), Optional.empty());
+        assertEquals(StringUtils.toPositiveNonZeroDouble("0.0"), Optional.empty());
+
+        assertEquals(StringUtils.toPositiveNonZeroDouble("foo"), Optional.empty());
+    }
 }

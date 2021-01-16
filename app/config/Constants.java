@@ -1,8 +1,6 @@
 package config;
 
-import models.Category;
-import models.Limit;
-import models.Sort;
+import models.*;
 import play.libs.typedmap.TypedKey;
 
 public class Constants {
@@ -12,6 +10,9 @@ public class Constants {
         public static final TypedKey<Category> CATEGORY = TypedKey.create("category");
         public static final TypedKey<Sort> SORT = TypedKey.create("sort");
         public static final TypedKey<Limit> LIMIT = TypedKey.create("limit");
+
+        public static final TypedKey<MinHeight> MIN_HEIGHT = TypedKey.create("minHeight");
+        public static final TypedKey<MaxHeight> MAX_HEIGHT = TypedKey.create("maxHeight");
     }
 
     public class ErrorMessages {
@@ -37,5 +38,14 @@ public class Constants {
 
         public static final String INVALID_LIMIT_QUERY_PARAMETER =
                 "Invalid value for search parameter 'limit'. Please specify an integer value greater than 0.";
+
+        public static final String INVALID_MIN_HEIGHT_QUERY_PARAMETER =
+                "Invalid value for search parameter 'minHeight'. Please specify an integer or decimal value greater than 0.";
+
+        public static final String INVALID_MAX_HEIGHT_QUERY_PARAMETER =
+                "Invalid value for search parameter 'maxHeight'. Please specify an integer or decimal value greater than 0.";
+
+        public static final String INVALID_MIN_HEIGHT_GREATER_THAN_MAX_HEIGHT =
+                "Invalid value for search parameter 'minHeight'. It must be less than 'maxHeight'";
     }
 }

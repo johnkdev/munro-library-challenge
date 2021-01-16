@@ -14,4 +14,17 @@ public class StringUtils {
 
         return Optional.empty();
     }
+
+    public static Optional<Double> toPositiveNonZeroDouble(String str) {
+        try {
+            double number = Double.parseDouble(str);
+
+            if (number > 0.0)
+                return Optional.of(number);
+        } catch (NumberFormatException e) {
+            return Optional.empty();
+        }
+
+        return Optional.empty();
+    }
 }
