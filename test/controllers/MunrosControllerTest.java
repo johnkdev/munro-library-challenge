@@ -63,6 +63,374 @@ public class MunrosControllerTest extends WithApplication {
     }
 
     @Test
+    public void testSearchWithLimitParameter() {
+        Http.RequestBuilder request = new Http.RequestBuilder()
+                .method(GET)
+                .header(Http.HeaderNames.HOST, "localhost:19001")
+                .uri("/search?limit=10");
+
+        Result result = route(app, request);
+
+        assertEquals(OK, result.status());
+        assertEquals(Http.MimeTypes.JSON, result.contentType().get());
+        assertNotEquals("", contentAsString(result));
+
+        JsonNode json = Json.parse(contentAsString(result));
+
+        int itemCount = json.size();
+
+        Set<String> actualKeys = getJsonKeys(json);
+        Set<String> expectedKeys = new HashSet<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
+
+        assertFalse(json.isEmpty());
+        assertTrue(json.isArray());
+        assertEquals(10, itemCount);
+        assertEquals(expectedKeys, actualKeys);
+    }
+
+    @Test
+    public void testSearchWithMinHeightParameter() {
+        Http.RequestBuilder request = new Http.RequestBuilder()
+                .method(GET)
+                .header(Http.HeaderNames.HOST, "localhost:19001")
+                .uri("/search?minHeight=1309");
+
+        Result result = route(app, request);
+
+        assertEquals(OK, result.status());
+        assertEquals(Http.MimeTypes.JSON, result.contentType().get());
+        assertNotEquals("", contentAsString(result));
+
+        JsonNode json = Json.parse(contentAsString(result));
+
+        int itemCount = json.size();
+
+        Set<String> actualKeys = getJsonKeys(json);
+        Set<String> expectedKeys = new HashSet<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
+
+        assertFalse(json.isEmpty());
+        assertTrue(json.isArray());
+        assertEquals(2, itemCount);
+        assertEquals(expectedKeys, actualKeys);
+    }
+
+    @Test
+    public void testSearchWithMaxHeightParameter() {
+        Http.RequestBuilder request = new Http.RequestBuilder()
+                .method(GET)
+                .header(Http.HeaderNames.HOST, "localhost:19001")
+                .uri("/search?maxHeight=1309");
+
+        Result result = route(app, request);
+
+        assertEquals(OK, result.status());
+        assertEquals(Http.MimeTypes.JSON, result.contentType().get());
+        assertNotEquals("", contentAsString(result));
+
+        JsonNode json = Json.parse(contentAsString(result));
+
+        int itemCount = json.size();
+
+        Set<String> actualKeys = getJsonKeys(json);
+        Set<String> expectedKeys = new HashSet<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
+
+        assertFalse(json.isEmpty());
+        assertTrue(json.isArray());
+        assertEquals(508, itemCount);
+        assertEquals(expectedKeys, actualKeys);
+    }
+
+    @Test
+    public void testSearchWithMinHeightAndMaxHeightParameters() {
+        Http.RequestBuilder request = new Http.RequestBuilder()
+                .method(GET)
+                .header(Http.HeaderNames.HOST, "localhost:19001")
+                .uri("/search?minHeight=1291&maxHeight=1309");
+
+        Result result = route(app, request);
+
+        assertEquals(OK, result.status());
+        assertEquals(Http.MimeTypes.JSON, result.contentType().get());
+        assertNotEquals("", contentAsString(result));
+
+        JsonNode json = Json.parse(contentAsString(result));
+
+        int itemCount = json.size();
+
+        Set<String> actualKeys = getJsonKeys(json);
+        Set<String> expectedKeys = new HashSet<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
+
+        assertFalse(json.isEmpty());
+        assertTrue(json.isArray());
+        assertEquals(3, itemCount);
+        assertEquals(expectedKeys, actualKeys);
+    }
+
+    @Test
+    public void testSearchWithSortByNameAscendingParameter() {
+        Http.RequestBuilder request = new Http.RequestBuilder()
+                .method(GET)
+                .header(Http.HeaderNames.HOST, "localhost:19001")
+                .uri("/search?sort=name+asc&limit=1");
+
+        Result result = route(app, request);
+
+        assertEquals(OK, result.status());
+        assertEquals(Http.MimeTypes.JSON, result.contentType().get());
+        assertNotEquals("", contentAsString(result));
+
+        JsonNode json = Json.parse(contentAsString(result));
+
+        int itemCount = json.size();
+
+        Set<String> actualKeys = getJsonKeys(json);
+        Set<String> expectedKeys = new HashSet<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
+
+        assertFalse(json.isEmpty());
+        assertTrue(json.isArray());
+        assertEquals(1, itemCount);
+        assertEquals(expectedKeys, actualKeys);
+
+        assertEquals("A' Bhuidheanach Bheag", json.get(0).get("name").asText());
+        assertEquals("MUN", json.get(0).get("hillCategory").asText());
+        assertEquals("NN660775", json.get(0).get("gridReference").asText());
+        assertEquals("936", json.get(0).get("heightInMeters").asText());
+    }
+
+    @Test
+    public void testSearchWithSortByNameDescendingParameter() {
+        Http.RequestBuilder request = new Http.RequestBuilder()
+                .method(GET)
+                .header(Http.HeaderNames.HOST, "localhost:19001")
+                .uri("/search?sort=name+desc&limit=1");
+
+        Result result = route(app, request);
+
+        assertEquals(OK, result.status());
+        assertEquals(Http.MimeTypes.JSON, result.contentType().get());
+        assertNotEquals("", contentAsString(result));
+
+        JsonNode json = Json.parse(contentAsString(result));
+
+        int itemCount = json.size();
+
+        Set<String> actualKeys = getJsonKeys(json);
+        Set<String> expectedKeys = new HashSet<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
+
+        assertFalse(json.isEmpty());
+        assertTrue(json.isArray());
+        assertEquals(1, itemCount);
+        assertEquals(expectedKeys, actualKeys);
+
+        assertEquals("Tom a' Choinich - Tom a' Choinich Beag", json.get(0).get("name").asText());
+        assertEquals("TOP", json.get(0).get("hillCategory").asText());
+        assertEquals("NH157272", json.get(0).get("gridReference").asText());
+        assertEquals("1032", json.get(0).get("heightInMeters").asText());
+    }
+
+    @Test
+    public void testSearchWithSortByHeightAscendingParameter() {
+        Http.RequestBuilder request = new Http.RequestBuilder()
+                .method(GET)
+                .header(Http.HeaderNames.HOST, "localhost:19001")
+                .uri("/search?sort=heightInMeters+asc&limit=1");
+
+        Result result = route(app, request);
+
+        assertEquals(OK, result.status());
+        assertEquals(Http.MimeTypes.JSON, result.contentType().get());
+        assertNotEquals("", contentAsString(result));
+
+        JsonNode json = Json.parse(contentAsString(result));
+
+        int itemCount = json.size();
+
+        Set<String> actualKeys = getJsonKeys(json);
+        Set<String> expectedKeys = new HashSet<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
+
+        assertFalse(json.isEmpty());
+        assertTrue(json.isArray());
+        assertEquals(1, itemCount);
+        assertEquals(expectedKeys, actualKeys);
+
+        assertEquals("Mullach Coire nan Cisteachan [Carn na Caim South Top]", json.get(0).get("name").asText());
+        assertEquals("TOP", json.get(0).get("hillCategory").asText());
+        assertEquals("NN663806", json.get(0).get("gridReference").asText());
+        assertEquals("914.6", json.get(0).get("heightInMeters").asText());
+    }
+
+    @Test
+    public void testSearchWithSortByHeightDescendingParameter() {
+        Http.RequestBuilder request = new Http.RequestBuilder()
+                .method(GET)
+                .header(Http.HeaderNames.HOST, "localhost:19001")
+                .uri("/search?sort=heightInMeters+desc&limit=1");
+
+        Result result = route(app, request);
+
+        assertEquals(OK, result.status());
+        assertEquals(Http.MimeTypes.JSON, result.contentType().get());
+        assertNotEquals("", contentAsString(result));
+
+        JsonNode json = Json.parse(contentAsString(result));
+
+        int itemCount = json.size();
+
+        Set<String> actualKeys = getJsonKeys(json);
+        Set<String> expectedKeys = new HashSet<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
+
+        assertFalse(json.isEmpty());
+        assertTrue(json.isArray());
+        assertEquals(1, itemCount);
+        assertEquals(expectedKeys, actualKeys);
+
+        assertEquals("Ben Nevis", json.get(0).get("name").asText());
+        assertEquals("MUN", json.get(0).get("hillCategory").asText());
+        assertEquals("NN166712", json.get(0).get("gridReference").asText());
+        assertEquals("1344.53", json.get(0).get("heightInMeters").asText());
+    }
+
+    @Test
+    public void testSearchWithMunCategoryParameter() {
+        Http.RequestBuilder request = new Http.RequestBuilder()
+                .method(GET)
+                .header(Http.HeaderNames.HOST, "localhost:19001")
+                .uri("/search?category=munro");
+
+        Result result = route(app, request);
+
+        assertEquals(OK, result.status());
+        assertEquals(Http.MimeTypes.JSON, result.contentType().get());
+        assertNotEquals("", contentAsString(result));
+
+        JsonNode json = Json.parse(contentAsString(result));
+
+        int itemCount = json.size();
+
+        Set<String> actualKeys = getJsonKeys(json);
+        Set<String> expectedKeys = new HashSet<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
+
+        assertFalse(json.isEmpty());
+        assertTrue(json.isArray());
+        assertEquals(282, itemCount);
+        assertEquals(expectedKeys, actualKeys);
+
+        assertEquals("A' Bhuidheanach Bheag", json.get(0).get("name").asText());
+        assertEquals("MUN", json.get(0).get("hillCategory").asText());
+        assertEquals("NN660775", json.get(0).get("gridReference").asText());
+        assertEquals("936", json.get(0).get("heightInMeters").asText());
+    }
+
+    @Test
+    public void testSearchWithMunTopCategoryParameter() {
+        Http.RequestBuilder request = new Http.RequestBuilder()
+                .method(GET)
+                .header(Http.HeaderNames.HOST, "localhost:19001")
+                .uri("/search?category=munro+top");
+
+        Result result = route(app, request);
+
+        assertEquals(OK, result.status());
+        assertEquals(Http.MimeTypes.JSON, result.contentType().get());
+        assertNotEquals("", contentAsString(result));
+
+        JsonNode json = Json.parse(contentAsString(result));
+
+        int itemCount = json.size();
+
+        Set<String> actualKeys = getJsonKeys(json);
+        Set<String> expectedKeys = new HashSet<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
+
+        assertFalse(json.isEmpty());
+        assertTrue(json.isArray());
+        assertEquals(227, itemCount);
+        assertEquals(expectedKeys, actualKeys);
+
+        assertEquals("A' Bhuidheanach Bheag - Glas Mheall Mor", json.get(0).get("name").asText());
+        assertEquals("TOP", json.get(0).get("hillCategory").asText());
+        assertEquals("NN680769", json.get(0).get("gridReference").asText());
+        assertEquals("927.9", json.get(0).get("heightInMeters").asText());
+    }
+
+    @Test
+    public void testSearchWithMunOrMunTopCategoryParameter() {
+        Http.RequestBuilder request = new Http.RequestBuilder()
+                .method(GET)
+                .header(Http.HeaderNames.HOST, "localhost:19001")
+                .uri("/search?category=munro,munro+top");
+
+        Result result = route(app, request);
+
+        assertEquals(OK, result.status());
+        assertEquals(Http.MimeTypes.JSON, result.contentType().get());
+        assertNotEquals("", contentAsString(result));
+
+        JsonNode json = Json.parse(contentAsString(result));
+
+        int itemCount = json.size();
+
+        Set<String> actualKeys = getJsonKeys(json);
+        Set<String> expectedKeys = new HashSet<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
+
+        JsonNode firstEntry = json.get(0);
+        JsonNode secondEntry = json.get(1);
+
+        assertFalse(json.isEmpty());
+        assertTrue(json.isArray());
+        assertEquals(509, itemCount);
+        assertEquals(expectedKeys, actualKeys);
+
+        assertEquals("A' Bhuidheanach Bheag", firstEntry.get("name").asText());
+        assertEquals("MUN", firstEntry.get("hillCategory").asText());
+        assertEquals("NN660775", firstEntry.get("gridReference").asText());
+        assertEquals("936", firstEntry.get("heightInMeters").asText());
+
+        assertEquals("A' Bhuidheanach Bheag - Glas Mheall Mor", secondEntry.get("name").asText());
+        assertEquals("TOP", secondEntry.get("hillCategory").asText());
+        assertEquals("NN680769", secondEntry.get("gridReference").asText());
+        assertEquals("927.9", secondEntry.get("heightInMeters").asText());
+    }
+
+    @Test
+    public void testSearchWithMunOrMunTopCategoryParameterAlt() {
+        Http.RequestBuilder request = new Http.RequestBuilder()
+                .method(GET)
+                .header(Http.HeaderNames.HOST, "localhost:19001")
+                .uri("/search?category=munro+top,munro");
+
+        Result result = route(app, request);
+
+        assertEquals(OK, result.status());
+        assertEquals(Http.MimeTypes.JSON, result.contentType().get());
+        assertNotEquals("", contentAsString(result));
+
+        JsonNode json = Json.parse(contentAsString(result));
+
+        int itemCount = json.size();
+
+        Set<String> actualKeys = getJsonKeys(json);
+        Set<String> expectedKeys = new HashSet<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
+
+        JsonNode firstEntry = json.get(0);
+        JsonNode secondEntry = json.get(1);
+
+        assertFalse(json.isEmpty());
+        assertTrue(json.isArray());
+        assertEquals(509, itemCount);
+        assertEquals(expectedKeys, actualKeys);
+
+        assertEquals("A' Bhuidheanach Bheag", firstEntry.get("name").asText());
+        assertEquals("MUN", firstEntry.get("hillCategory").asText());
+        assertEquals("NN660775", firstEntry.get("gridReference").asText());
+        assertEquals("936", firstEntry.get("heightInMeters").asText());
+
+        assertEquals("A' Bhuidheanach Bheag - Glas Mheall Mor", secondEntry.get("name").asText());
+        assertEquals("TOP", secondEntry.get("hillCategory").asText());
+        assertEquals("NN680769", secondEntry.get("gridReference").asText());
+        assertEquals("927.9", secondEntry.get("heightInMeters").asText());
+    }
+
+    @Test
     public void testReturn400IfCategoryQueryParameterInvalid() {
         Http.RequestBuilder request = new Http.RequestBuilder()
                 .method(GET)
