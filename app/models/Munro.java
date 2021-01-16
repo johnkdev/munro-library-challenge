@@ -1,11 +1,43 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.opencsv.bean.CsvBindByName;
 
 import java.net.URL;
 import java.util.Objects;
 
-public class Munro {
+@JsonIgnoreProperties({
+        "runningNo",
+        "dobihNumber",
+        "streetmap",
+        "geograph",
+        "hillBagging",
+        "smcSection",
+        "rhbSection",
+        "section",
+        "heightInFeet",
+        "map150",
+        "map125",
+        "gridRefXY",
+        "xcoord",
+        "ycoord",
+        "year1891",
+        "year1921",
+        "year1933",
+        "year1953",
+        "year1969",
+        "year1974",
+        "year1981",
+        "year1984",
+        "year1990",
+        "year1997",
+        "postYear1997",
+        "comments"
+})
+@JsonPropertyOrder({"name", "heightInMetres", "hillCategory", "gridReference"})
+public class Munro implements Comparable<Munro> {
     @CsvBindByName(column = "Running No")
     private String runningNo;
 
@@ -173,6 +205,11 @@ public class Munro {
         return heightInMeters;
     }
 
+    @JsonProperty("heightInMeters")
+    public String getHeightInMetersAsString() {
+        return heightInMeters % 1 == 0 ? String.valueOf((int)heightInMeters) : String.valueOf(heightInMeters);
+    }
+
     public void setHeightInMeters(double heightInMeters) {
         this.heightInMeters = heightInMeters;
     }
@@ -201,6 +238,7 @@ public class Munro {
         this.map125 = map125;
     }
 
+    @JsonProperty("gridReference")
     public String getGridRef() {
         return gridRef;
     }
@@ -313,6 +351,7 @@ public class Munro {
         this.year1997 = year1997;
     }
 
+    @JsonProperty("hillCategory")
     public String getPostYear1997() {
         return postYear1997;
     }
@@ -327,6 +366,11 @@ public class Munro {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    @Override
+    public int compareTo(Munro other) {
+        return name.compareTo(other.getName());
     }
 
     @Override
