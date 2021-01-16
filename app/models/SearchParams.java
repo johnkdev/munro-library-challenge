@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -55,5 +56,19 @@ public class SearchParams {
         }
 
         return predicates.stream().reduce(Predicate::and).orElse(entry -> true);
+    }
+
+    public Comparator<Munro> buildComparator() {
+        if (sort == Sort.HEIGHT_IN_METERS_ASC) {
+            return Comparator.comparing(Munro::getHeightInMeters);
+        } else if (sort == Sort.HEIGHT_IN_METERS_DESC) {
+            return Comparator.comparing(Munro::getHeightInMeters).reversed();
+        } else if (sort == Sort.NAME_ASC) {
+            return Comparator.comparing(Munro::getName);
+        } else if (sort == Sort.NAME_DESC) {
+            return Comparator.comparing(Munro::getName).reversed();
+        } else {
+            return Comparator.naturalOrder();
+        }
     }
 }

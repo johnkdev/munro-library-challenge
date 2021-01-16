@@ -5,7 +5,6 @@ import models.SearchParams;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -26,7 +25,8 @@ public class MunroSearchService {
         List<Munro> munros = munroCSVFile.getMunros()
                 .stream()
                 .filter(predicate)
-                .sorted(Comparator.naturalOrder())
+                .sorted(searchParams.buildComparator())
+                .limit(searchParams.getLimit() != null ? searchParams.getLimit().getValue() : munroCSVFile.getMunros().size())
                 .collect(Collectors.toList());
 
         return munros;
