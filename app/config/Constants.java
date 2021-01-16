@@ -1,6 +1,7 @@
 package config;
 
 import models.Category;
+import models.Sort;
 import play.libs.typedmap.TypedKey;
 
 public class Constants {
@@ -8,6 +9,7 @@ public class Constants {
 
     public static class Attrs {
         public static final TypedKey<Category> CATEGORY = TypedKey.create("category");
+        public static final TypedKey<Sort> SORT = TypedKey.create("sort");
     }
 
     public class ErrorMessages {
@@ -23,5 +25,12 @@ public class Constants {
                         "munro top\n" +
                         "munro,munro top\n" +
                         "munro top,munro\n";
+
+        public static final String INVALID_SORT_QUERY_PARAMETER =
+                "Invalid value for search parameter 'sort'. Please specify one of the following values:\n" +
+                        "heightInMetres asc\n" +
+                        "heightInMetres desc\n" +
+                        "name asc\n" +
+                        "name desc\n";
     }
 }
