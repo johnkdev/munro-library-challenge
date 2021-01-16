@@ -1,6 +1,7 @@
 package config;
 
 import models.Category;
+import models.Limit;
 import models.Sort;
 import play.libs.typedmap.TypedKey;
 
@@ -10,6 +11,7 @@ public class Constants {
     public static class Attrs {
         public static final TypedKey<Category> CATEGORY = TypedKey.create("category");
         public static final TypedKey<Sort> SORT = TypedKey.create("sort");
+        public static final TypedKey<Limit> LIMIT = TypedKey.create("limit");
     }
 
     public class ErrorMessages {
@@ -32,5 +34,8 @@ public class Constants {
                         "heightInMetres desc\n" +
                         "name asc\n" +
                         "name desc\n";
+
+        public static final String INVALID_LIMIT_QUERY_PARAMETER =
+                "Invalid value for search parameter 'limit'. Please specify an integer value greater than 0.";
     }
 }
