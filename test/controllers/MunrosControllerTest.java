@@ -432,6 +432,45 @@ public class MunrosControllerTest extends WithApplication {
     }
 
     @Test
+    public void testSearchWithAllQueryParameters() {
+        Http.RequestBuilder request = new Http.RequestBuilder()
+                .method(GET)
+                .header(Http.HeaderNames.HOST, "localhost:19001")
+                .uri("/search?category=munro+top&minHeight=1200&maxHeight=1265&limit=2&sort=name+desc");
+
+        Result result = route(app, request);
+
+        assertEquals(OK, result.status());
+        assertEquals(Http.MimeTypes.JSON, result.contentType().get());
+        assertNotEquals("", contentAsString(result));
+
+        JsonNode json = Json.parse(contentAsString(result));
+
+        int itemCount = json.size();
+
+        Set<String> actualKeys = getJsonKeys(json);
+        Set<String> expectedKeys = new HashSet<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
+
+        JsonNode firstEntry = json.get(0);
+        JsonNode secondEntry = json.get(1);
+
+        assertFalse(json.isEmpty());
+        assertTrue(json.isArray());
+        assertEquals(2, itemCount);
+        assertEquals(expectedKeys, actualKeys);
+
+        assertEquals("Cairn Toul - Stob Coire an t-Saighdeir", firstEntry.get("name").asText());
+        assertEquals("TOP", firstEntry.get("hillCategory").asText());
+        assertEquals("NN962963", firstEntry.get("gridReference").asText());
+        assertEquals("1213", firstEntry.get("heightInMeters").asText());
+
+        assertEquals("Cairn Gorm - Cairn Lochan", secondEntry.get("name").asText());
+        assertEquals("TOP", secondEntry.get("hillCategory").asText());
+        assertEquals("NH985025", secondEntry.get("gridReference").asText());
+        assertEquals("1216", secondEntry.get("heightInMeters").asText());
+    }
+
+    @Test
     public void testReturn400IfCategoryQueryParameterInvalid() {
         Http.RequestBuilder request = new Http.RequestBuilder()
                 .method(GET)
