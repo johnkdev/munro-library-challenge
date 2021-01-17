@@ -21,6 +21,16 @@ lazy val root = (project in file("."))
       "-Xlint:deprecation",
       "-Werror"
     ),
+    jacocoReportSettings := JacocoReportSettings()
+      .withThresholds(
+        JacocoThresholds(
+          instruction = 90,
+          method = 90,
+          branch = 80,
+          complexity = 80,
+          line = 90,
+          clazz = 90)
+      ),
     jacocoExcludes in Test := Seq(
       "controllers.Reverse*",
       "controllers.javascript.*",
