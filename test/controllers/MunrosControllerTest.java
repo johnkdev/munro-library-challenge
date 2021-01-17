@@ -41,8 +41,8 @@ public class MunrosControllerTest extends WithApplication {
 
         int itemCount = json.size();
 
-        Set<String> actualKeys = getJsonKeys(json);
-        Set<String> expectedKeys = new HashSet<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
+        List<String> actualKeys = getJsonKeys(json);
+        List<String> expectedKeys = new ArrayList<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
 
         JsonNode firstEntry = json.get(0);
         JsonNode secondEntry = json.get(1);
@@ -80,8 +80,8 @@ public class MunrosControllerTest extends WithApplication {
 
         int itemCount = json.size();
 
-        Set<String> actualKeys = getJsonKeys(json);
-        Set<String> expectedKeys = new HashSet<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
+        List<String> actualKeys = getJsonKeys(json);
+        List<String> expectedKeys = new ArrayList<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
 
         assertFalse(json.isEmpty());
         assertTrue(json.isArray());
@@ -106,8 +106,8 @@ public class MunrosControllerTest extends WithApplication {
 
         int itemCount = json.size();
 
-        Set<String> actualKeys = getJsonKeys(json);
-        Set<String> expectedKeys = new HashSet<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
+        List<String> actualKeys = getJsonKeys(json);
+        List<String> expectedKeys = new ArrayList<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
 
         assertFalse(json.isEmpty());
         assertTrue(json.isArray());
@@ -132,8 +132,8 @@ public class MunrosControllerTest extends WithApplication {
 
         int itemCount = json.size();
 
-        Set<String> actualKeys = getJsonKeys(json);
-        Set<String> expectedKeys = new HashSet<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
+        List<String> actualKeys = getJsonKeys(json);
+        List<String> expectedKeys = new ArrayList<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
 
         assertFalse(json.isEmpty());
         assertTrue(json.isArray());
@@ -158,8 +158,8 @@ public class MunrosControllerTest extends WithApplication {
 
         int itemCount = json.size();
 
-        Set<String> actualKeys = getJsonKeys(json);
-        Set<String> expectedKeys = new HashSet<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
+        List<String> actualKeys = getJsonKeys(json);
+        List<String> expectedKeys = new ArrayList<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
 
         assertFalse(json.isEmpty());
         assertTrue(json.isArray());
@@ -184,8 +184,8 @@ public class MunrosControllerTest extends WithApplication {
 
         int itemCount = json.size();
 
-        Set<String> actualKeys = getJsonKeys(json);
-        Set<String> expectedKeys = new HashSet<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
+        List<String> actualKeys = getJsonKeys(json);
+        List<String> expectedKeys = new ArrayList<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
 
         assertFalse(json.isEmpty());
         assertTrue(json.isArray());
@@ -215,8 +215,8 @@ public class MunrosControllerTest extends WithApplication {
 
         int itemCount = json.size();
 
-        Set<String> actualKeys = getJsonKeys(json);
-        Set<String> expectedKeys = new HashSet<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
+        List<String> actualKeys = getJsonKeys(json);
+        List<String> expectedKeys = new ArrayList<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
 
         assertFalse(json.isEmpty());
         assertTrue(json.isArray());
@@ -246,8 +246,8 @@ public class MunrosControllerTest extends WithApplication {
 
         int itemCount = json.size();
 
-        Set<String> actualKeys = getJsonKeys(json);
-        Set<String> expectedKeys = new HashSet<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
+        List<String> actualKeys = getJsonKeys(json);
+        List<String> expectedKeys = new ArrayList<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
 
         assertFalse(json.isEmpty());
         assertTrue(json.isArray());
@@ -277,8 +277,8 @@ public class MunrosControllerTest extends WithApplication {
 
         int itemCount = json.size();
 
-        Set<String> actualKeys = getJsonKeys(json);
-        Set<String> expectedKeys = new HashSet<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
+        List<String> actualKeys = getJsonKeys(json);
+        List<String> expectedKeys = new ArrayList<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
 
         assertFalse(json.isEmpty());
         assertTrue(json.isArray());
@@ -308,8 +308,8 @@ public class MunrosControllerTest extends WithApplication {
 
         int itemCount = json.size();
 
-        Set<String> actualKeys = getJsonKeys(json);
-        Set<String> expectedKeys = new HashSet<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
+        List<String> actualKeys = getJsonKeys(json);
+        List<String> expectedKeys = new ArrayList<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
 
         assertFalse(json.isEmpty());
         assertTrue(json.isArray());
@@ -339,8 +339,8 @@ public class MunrosControllerTest extends WithApplication {
 
         int itemCount = json.size();
 
-        Set<String> actualKeys = getJsonKeys(json);
-        Set<String> expectedKeys = new HashSet<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
+        List<String> actualKeys = getJsonKeys(json);
+        List<String> expectedKeys = new ArrayList<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
 
         assertFalse(json.isEmpty());
         assertTrue(json.isArray());
@@ -370,8 +370,8 @@ public class MunrosControllerTest extends WithApplication {
 
         int itemCount = json.size();
 
-        Set<String> actualKeys = getJsonKeys(json);
-        Set<String> expectedKeys = new HashSet<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
+        List<String> actualKeys = getJsonKeys(json);
+        List<String> expectedKeys = new ArrayList<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
 
         JsonNode firstEntry = json.get(0);
         JsonNode secondEntry = json.get(1);
@@ -409,8 +409,8 @@ public class MunrosControllerTest extends WithApplication {
 
         int itemCount = json.size();
 
-        Set<String> actualKeys = getJsonKeys(json);
-        Set<String> expectedKeys = new HashSet<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
+        List<String> actualKeys = getJsonKeys(json);
+        List<String> expectedKeys = new ArrayList<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
 
         JsonNode firstEntry = json.get(0);
         JsonNode secondEntry = json.get(1);
@@ -448,8 +448,8 @@ public class MunrosControllerTest extends WithApplication {
 
         int itemCount = json.size();
 
-        Set<String> actualKeys = getJsonKeys(json);
-        Set<String> expectedKeys = new HashSet<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
+        List<String> actualKeys = getJsonKeys(json);
+        List<String> expectedKeys = new ArrayList<>(Arrays.asList("name", "heightInMeters", "hillCategory", "gridReference"));
 
         JsonNode firstEntry = json.get(0);
         JsonNode secondEntry = json.get(1);
@@ -554,8 +554,8 @@ public class MunrosControllerTest extends WithApplication {
         assertEquals(Constants.ErrorMessages.INVALID_SORT_QUERY_PARAMETER, contentAsString(result));
     }
 
-    private Set<String> getJsonKeys(JsonNode json) {
-        Set<String> keys = new HashSet<>();
+    private List<String> getJsonKeys(JsonNode json) {
+        Set<String> keys = new LinkedHashSet<>();
 
         Iterator<JsonNode> node = json.elements();
 
@@ -564,6 +564,6 @@ public class MunrosControllerTest extends WithApplication {
             next.fieldNames().forEachRemaining(keys::add);
         }
 
-        return keys;
+        return new ArrayList<>(keys);
     }
 }

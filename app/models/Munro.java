@@ -36,7 +36,7 @@ import java.util.Objects;
         "postYear1997",
         "comments"
 })
-@JsonPropertyOrder({"name", "heightInMetres", "hillCategory", "gridReference"})
+@JsonPropertyOrder({"name", "heightInMetres", "postYear1997", "gridRef"})
 public class Munro implements Comparable<Munro> {
     @CsvBindByName(column = "Running No")
     private String runningNo;
