@@ -17,6 +17,22 @@ Task | Description | Command
 test | Runs the standard unit tests | ```sbt test```
 jacoco | Runs code coverage analysis | ```sbt jacoco```
 
+## Code Coverage Report
+```bash
+$ sbt jacoco
+```
+
+```text
+------- Jacoco Coverage Report -------
+
+Lines: 97.86% (>= required 90.0%) covered, 8 of 373 missed, OK
+Instructions: 98.17% (>= required 90.0%) covered, 27 of 1473 missed, OK
+Branches: 81.46% (>= required 80.0%) covered, 28 of 151 missed, OK
+Methods: 93.04% (>= required 90.0%) covered, 8 of 115 missed, OK
+Complexity: 81.35% (>= required 80.0%) covered, 36 of 193 missed, OK
+Class: 90% (>= required 90.0%) covered, 2 of 20 missed, OK
+```
+
 ## API Query Parameters
 All query parameters are optional.
 
