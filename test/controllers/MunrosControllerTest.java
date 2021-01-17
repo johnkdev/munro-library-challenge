@@ -1,6 +1,7 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import config.Constants;
 import org.junit.Test;
 import play.Application;
 import play.inject.guice.GuiceApplicationBuilder;
@@ -439,6 +440,7 @@ public class MunrosControllerTest extends WithApplication {
 
         Result result = route(app, request);
         assertEquals(BAD_REQUEST, result.status());
+        assertEquals(Constants.ErrorMessages.INVALID_CATEGORY_QUERY_PARAMETER, contentAsString(result));
     }
 
     @Test
@@ -450,6 +452,7 @@ public class MunrosControllerTest extends WithApplication {
 
         Result result = route(app, request);
         assertEquals(BAD_REQUEST, result.status());
+        assertEquals(Constants.ErrorMessages.INVALID_LIMIT_QUERY_PARAMETER, contentAsString(result));
     }
 
     @Test
@@ -461,6 +464,7 @@ public class MunrosControllerTest extends WithApplication {
 
         Result result = route(app, request);
         assertEquals(BAD_REQUEST, result.status());
+        assertEquals(Constants.ErrorMessages.INVALID_MIN_HEIGHT_QUERY_PARAMETER, contentAsString(result));
     }
 
     @Test
@@ -472,6 +476,7 @@ public class MunrosControllerTest extends WithApplication {
 
         Result result = route(app, request);
         assertEquals(BAD_REQUEST, result.status());
+        assertEquals(Constants.ErrorMessages.INVALID_MAX_HEIGHT_QUERY_PARAMETER, contentAsString(result));
     }
 
     @Test
@@ -483,6 +488,19 @@ public class MunrosControllerTest extends WithApplication {
 
         Result result = route(app, request);
         assertEquals(BAD_REQUEST, result.status());
+        assertEquals(Constants.ErrorMessages.INVALID_MIN_HEIGHT_QUERY_PARAMETER, contentAsString(result));
+    }
+
+    @Test
+    public void testReturn400IfMinHeightValidAndMaxHeightInvalid() {
+        Http.RequestBuilder request = new Http.RequestBuilder()
+                .method(GET)
+                .header(Http.HeaderNames.HOST, "localhost:19001")
+                .uri("/search?minHeight=5&maxHeight=bar");
+
+        Result result = route(app, request);
+        assertEquals(BAD_REQUEST, result.status());
+        assertEquals(Constants.ErrorMessages.INVALID_MAX_HEIGHT_QUERY_PARAMETER, contentAsString(result));
     }
 
     @Test
@@ -494,6 +512,7 @@ public class MunrosControllerTest extends WithApplication {
 
         Result result = route(app, request);
         assertEquals(BAD_REQUEST, result.status());
+        assertEquals(Constants.ErrorMessages.INVALID_SORT_QUERY_PARAMETER, contentAsString(result));
     }
 
     private Set<String> getJsonKeys(JsonNode json) {
