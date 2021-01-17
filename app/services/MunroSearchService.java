@@ -5,6 +5,7 @@ import models.SearchParams;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -22,11 +23,15 @@ public class MunroSearchService {
     public List<Munro> search(SearchParams searchParams) {
         Predicate<Munro> predicate = searchParams.toMunroSearchPredicate();
 
+        Comparator<Munro> comparator = searchParams.buildComparator();
+
+        int limit = searchParams.getLimit() != null ? searchParams.getLimit().getValue() : munroCSVFile.getMunros().size();
+
         List<Munro> munros = munroCSVFile.getMunros()
                 .stream()
                 .filter(predicate)
-                .sorted(searchParams.buildComparator())
-                .limit(searchParams.getLimit() != null ? searchParams.getLimit().getValue() : munroCSVFile.getMunros().size())
+                .sorted(comparator)
+                .limit(limit)
                 .collect(Collectors.toList());
 
         return munros;
